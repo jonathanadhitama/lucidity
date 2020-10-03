@@ -37,8 +37,8 @@ function App() {
                         : <Redirect to="/login" />
                     }
                 </Route>
-                <Route path="/login" exact component={Login} />
-                <Route path="/register" exact component={Register} />
+                <Route path="/login" exact><Login/></Route>
+                <Route path="/register" exact><Register/></Route>
                 <PrivateRoute path="/home" exact component={Home} />
             </SectionContainer>
         </AppContainer>

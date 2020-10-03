@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { ContainerDiv } from "../../commonStyles";
 import LogoutButton from "./LogoutButton";
 import { userDetail as userDetailService, userLogout as userLogoutService } from "../../services/userService";
@@ -6,7 +7,7 @@ import ErrorNotification from "../error/ErrorNotification";
 import styled from "styled-components";
 import UserDetailCard from "./UserDetailCard";
 import Cookies from 'js-cookie';
-import {HOME_URL, USER_TOKEN_KEY} from '../../utils/constants';
+import { USER_TOKEN_KEY } from '../../utils/constants';
 
 const UserDetailContainer = styled.div`
     width: 50%;
@@ -18,10 +19,12 @@ const UserDetailContainer = styled.div`
 `;
 
 
-const Home = ({ history }) => {
+const Home = () => {
     const [detailError, setDetailError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [userData, setUserData] = useState(null);
+
+    const history = useHistory();
 
     useEffect(() => {
         userDetailService()

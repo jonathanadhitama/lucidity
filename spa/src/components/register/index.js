@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { TextField } from "formik-material-ui";
 import {
@@ -21,9 +22,11 @@ const TEXT_FIELDS = [
     { name: "password_confirmation", label: "CONFIRM PASSWORD", required: true, type: "password" }
 ];
 
-const Register = ({ history }) => {
+const Register = () => {
     const [registerError, setRegisterError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const history = useHistory();
 
     return (
         <ContainerDiv

@@ -10,7 +10,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
             return (
                 <React.Fragment>
                     {isLoggedIn() ? (
-                        <Component {...props} />
+                        <Component />
                     ) : (
                         <Redirect
                             to={{
