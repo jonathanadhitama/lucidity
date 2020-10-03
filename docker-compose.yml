@@ -1,0 +1,74 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: ./server/
+      dockerfile: Dockerfile
+    image: lucidity-server
+    container_name: lucidity-server
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/
+    volumes:
+      - ./server/:/var/www
+      - ./server/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 8000:80
+    volumes:
+      - ./server/:/var/www
+      - ./server/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./server/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+  #SPA Container
+  spa:
+    build:
+      context: ./spa/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - ./spa:/app
+
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
