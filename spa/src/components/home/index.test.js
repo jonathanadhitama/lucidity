@@ -11,12 +11,14 @@ import {act} from "@testing-library/react";
 
 const mockHistoryPush = jest.fn();
 
+const userData = {
+    id: 1, name: 'test', email: 'test@mail.com'
+};
+
 const userDetailServiceMock = jest.fn( async () => (
     {
         success: true,
-        user: {
-            id: 1, name: 'test', email: 'test@mail.com'
-        }
+        user: { ...userData }
     }
 ));
 
@@ -52,11 +54,11 @@ describe('LoginComponent', function () {
         expect(card.length).toEqual(1);
 
         //Check user detail card props
-        expect(card.props().id).toEqual(1);
+        expect(card.props().id).toEqual(userData.id);
 
-        expect(card.props().name).toEqual('test');
+        expect(card.props().name).toEqual(userData.name);
 
-        expect(card.props().email).toEqual('test@mail.com');
+        expect(card.props().email).toEqual(userData.email);
 
         //Expect to have a button
         expect(wrap.find(Button).length).toEqual(1);
