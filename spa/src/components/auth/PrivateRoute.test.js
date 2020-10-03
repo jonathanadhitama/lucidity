@@ -28,7 +28,8 @@ describe('HeaderComponent', function () {
         expect(successLoginMockup).toHaveBeenCalled();
 
         //Expect to render Home Component
-        expect(wrap.contains(Home)).toBe(true);
+        const home = wrap.find(Home);
+        expect(home.exists()).toBe(true);
     });
     test('Renders correctly when user is not logged in', function () {
         const failureLoginMockup = jest.fn( () => false );
@@ -44,6 +45,6 @@ describe('HeaderComponent', function () {
 
         //Expect to render a Redirect Component
         const redirect = wrap.find(Redirect);
-        expect(redirect.length).toEqual(1);
+        expect(redirect.exists()).toBe(true);
     });
 });
