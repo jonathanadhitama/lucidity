@@ -1,25 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from "react-router-dom";
+import PrivateRoute from "./components/auth/PrivateRoute";
+import Header from "./components/header";
+import Login from "./components/login";
+import Register from "./components/register";
+import Home from './components/home';
+
+import { isLoggedIn } from "./utils/utils";
+import styled from "styled-components";
+
+const AppContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+`;
+
+const SectionContainer = styled.div`
+    flex: 1;
+    width: 100%;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <AppContainer>
+            <Header />
+            <SectionContainer>
+                <Route path="/" exact>
+                    {isLoggedIn()
+                        ? <Redirect to="/home" />
+                        : <Redirect to="/login" />
+                    }
+                </Route>
+                <Route path="/login" exact component={Login} />
+                <Route path="/register" exact component={Register} />
+                <PrivateRoute path="/home" exact component={Home} />
+            </SectionContainer>
+        </AppContainer>
+    </Router>
   );
 }
 

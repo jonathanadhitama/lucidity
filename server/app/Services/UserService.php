@@ -16,6 +16,12 @@ class UserService
      */
     public function createUser($name, $email, $password)
     {
+        $user = new User();
+        $user->name = $name;
+        $user->email = $email;
+        $user->password = Hash::make($password);
+        $user->save();
+        return $user;
         User::create([
             'name' => $name,
             'email' => $email,

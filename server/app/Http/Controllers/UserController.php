@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Services\UserService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,12 +14,13 @@ class UserController extends Controller
     public function register(RegisterUserRequest $request)
     {
         try {
-            (new UserService)->createUser(
+            $user = (new UserService)->createUser(
                 $request->get('name'),
                 $request->get('email'),
                 $request->get('password'),
             );
-            return response()->json(['message' => 'success']);
+            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+            return response()->json(['message' => 'success', 'token' => $token, 'expires_in' => Carbon::now()->addDay()]);
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()]);
         }
@@ -33,7 +35,7 @@ class UserController extends Controller
         if (strlen($token) === 0) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         } else {
-            return response()->json(['message' => 'success', 'token' => $token], 200);
+            return response()->json(['message' => 'success', 'token' => $token, 'expires_in' => Carbon::now()->addDay()], 200);
         }
     }
 
