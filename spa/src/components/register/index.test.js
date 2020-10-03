@@ -27,7 +27,7 @@ describe('Register', function () {
 
         const textFields = wrap.find(Field);
 
-        //There should be 2 fields (name, email, password, & password_confirmation)
+        //There should be 4 fields (name, email, password, & password_confirmation)
         expect(textFields.length).toEqual(4);
 
         //Expect first field to be email

@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
     /**
+     * Function that creates a new user
+     *
      * @param $name
      * @param $email
      * @param $password
+     * @return User
      */
     public function createUser($name, $email, $password)
     {
@@ -22,15 +25,12 @@ class UserService
         $user->password = Hash::make($password);
         $user->save();
         return $user;
-        User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => Hash::make($password)
-        ]);
     }
 
 
     /**
+     * Function that generate token for login
+     *
      * @param $email
      * @param $password
      * @return string
