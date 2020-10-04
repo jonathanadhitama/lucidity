@@ -4,6 +4,8 @@ import {
 } from "../utils/constants";
 import { setCookie, getAccessToken } from "../utils/utils";
 
+/* Function that calls the Login API.
+Once a successful login has been performed, it will set a cookie containing the access token */
 export const login = ( email, password ) => {
     return new Promise((accept, reject) => {
         axios({
@@ -21,6 +23,8 @@ export const login = ( email, password ) => {
     });
 };
 
+/* Function that calls the Register API.
+Once a successful login has been performed, it will set a cookie containing the access token */
 export const register = ( name, email, password, password_confirmation ) => {
     return new Promise((accept, reject) => {
         axios({
@@ -38,6 +42,7 @@ export const register = ( name, email, password, password_confirmation ) => {
     });
 }
 
+/* Function that calls the Get User Detail API. */
 export const userDetail = () => {
     return new Promise((accept, reject) => {
         axios({
@@ -53,6 +58,7 @@ export const userDetail = () => {
     });
 }
 
+/* functions that calls the Logout API to invalidate the access token*/
 export const userLogout = () => {
     return new Promise((accept, reject) => {
         axios({

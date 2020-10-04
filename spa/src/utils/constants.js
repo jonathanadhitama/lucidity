@@ -1,6 +1,6 @@
 export const USER_TOKEN_KEY = "token";
 
-//URL Constants
+//SPA URL Constants
 export const HOME_URL = '/home';
 export const LOGIN_URL = '/login';
 export const REGISTER_URL = '/register';

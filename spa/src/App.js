@@ -12,6 +12,7 @@ import Home from './components/home';
 
 import { isLoggedIn } from "./utils/utils";
 import styled from "styled-components";
+import {HOME_URL, LOGIN_URL, REGISTER_URL} from "./utils/constants";
 
 const AppContainer = styled.div`
     width: 100vw;
@@ -33,13 +34,13 @@ function App() {
             <SectionContainer>
                 <Route path="/" exact>
                     {isLoggedIn()
-                        ? <Redirect to="/home" />
-                        : <Redirect to="/login" />
+                        ? <Redirect to={HOME_URL} />
+                        : <Redirect to={LOGIN_URL} />
                     }
                 </Route>
-                <Route path="/login" exact><Login/></Route>
-                <Route path="/register" exact><Register/></Route>
-                <PrivateRoute path="/home" exact component={Home} />
+                <Route path={LOGIN_URL} exact><Login/></Route>
+                <Route path={REGISTER_URL} exact><Register/></Route>
+                <PrivateRoute path={HOME_URL} exact component={Home} />
             </SectionContainer>
         </AppContainer>
     </Router>
