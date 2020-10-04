@@ -22,16 +22,16 @@
 - enzyme: Unit Testing Library
 
 # Initial Setup
-- $ `cd <PROJECT-DIRECTORY>/server`
-- $ `cp .env.example .env`
+- Navigate to project directory: $ `cd <PROJECT-DIRECTORY>/server`
+- Generate environment file via copying the example: $ `cp .env.example .env`
 - Modify environment values for:
-    - DB_HOST=db (we want to connect to db service in docker)
+    - DB_HOST=db (we want to connect to 'db' container in Docker)
     - DB_DATABASE= MySQL Database name goes here
     - DB_USERNAME= MySQL Username goes here
     - DB_PASSWORD= MySQL Password goes here
 - We want to generate a MySQL Server based on the .env values of server, so:
     - $ `docker-compose --env-file ./server/.env up --build`
-- Wait for docker to finish building
+- Wait for Docker to finish building
 - Run these respective command via `docker-compose exec app <command>` or via `docker ps` and `docker exec -it <container_id> sh`
     - Generate Laravel Application Key: $ `php artisan key:generate`
     - Migrate DB: $ `php artisan migrate`
