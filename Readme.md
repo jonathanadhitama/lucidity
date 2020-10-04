@@ -41,10 +41,19 @@
 - URL: localhost:8000
 - Has 4 REST APIs:
     - POST localhost:8000/api/login
+        - Parameters:
+        - email (string) required
+        - password (string) required
     - POST localhost:8000/api/register
+        - Parameters:
+        - name (string) required
+        - email (string) required
+        - password (string) required
+        - password_confirmation (string) required
     - POST localhost:8000/api/logout
+        - Requires access token
     - GET localhost:8000/api/user 
-
+        - Requires access token
 # SPA
 - URL: localhost:3000
 - Has 3 main pages:
