@@ -32,7 +32,7 @@
 - We want to generate a MySQL Server based on the .env values of server, so:
     - $ `docker-compose --env-file ./server/.env up --build`
 - Wait for docker to finish building
-- Run these respective command via `docker-compose exec app <command>` or via `docker ps` or `docker exec -it <container_id> sh`
+- Run these respective command via `docker-compose exec app <command>` or via `docker ps` and `docker exec -it <container_id> sh`
     - Generate Laravel Application Key: $ `php artisan key:generate`
     - Migrate DB: $ `php artisan migrate`
     - Generate passport tokens: $ `php artisan passport:install`
@@ -56,5 +56,5 @@
 - SPA unit testing with Enzyme and Jest
     - $ `cd <PROJECT-DIRECTORY>/spa` 
     - Running test: $ `npm test -- --watchAll=false`
-- Server unit and feature testing with in-built PHPUnit from Laravel via `docker-compose exec app <command>` or via `docker ps` or `docker exec -it <container_id> sh`
+- Server unit and feature testing with in-built PHPUnit from Laravel via `docker-compose exec app <command>` or via `docker ps` and `docker exec -it <container_id> sh`
     - Running test: $ `php artisan test` 
